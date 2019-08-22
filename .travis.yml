@@ -4,6 +4,6 @@ services:
     - docker
 dist: trusty
 before_install:
-    - docker build -t samnoh/react-app -f react-app/Dockerfile.dev react-app/.
+    - docker build -t samnoh/react-app -f Dockerfile.dev .
 script:
     - docker run -e CI=true samnoh/react-app npm test
