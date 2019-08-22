@@ -2,8 +2,20 @@ language: generic
 sudo: required
 services:
     - docker
-dist: trusty
 before_install:
     - docker build -t samnoh/react-app -f Dockerfile.dev .
 script:
     - docker run -e CI=true samnoh/react-app npm test
+deploy:
+    provider: elasticbeanstalk
+    region: 'ap-southeast-2'
+    app: 'docker-react'
+    env: 'DockerReact-env'
+    bucket_name: 'elasticbeanstalk-ap-southeast-2-059937204533'
+    bucket_path: 'docker-react'
+    on:
+        branch: master
+    access_key_id:
+        secure: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: '$AWS_SECRET_KEY'
