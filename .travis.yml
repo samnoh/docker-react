@@ -1,0 +1,9 @@
+language: generic
+sudo: required
+services:
+    - docker
+dist: trusty
+before_install:
+    - docker build -t samnoh/react-app -f react-app/Dockerfile.dev react-app/.
+script:
+    - docker run -e CI=true samnoh/react-app npm test
